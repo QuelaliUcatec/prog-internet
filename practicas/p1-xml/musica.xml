@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<musica>
+    <cancion genero="Indie">
+    <titulo idioma="ingles"> Trees </titulo>
+    <artista> Twenty One Pilots </artista>
+    <año> 2011 </año>
+    </cancion>
+
+    <cancion genero="Heavy Metal">
+    <titulo idioma="ingles"> Enter Sandman </titulo>
+    <artista> Metallica </artista>
+    <año> 1991 </año>
+    </cancion>
+
+    <cancion genero="Rock Argentino">
+    <titulo idioma="español"> Me Siento Mucho Mejor </titulo>
+    <artista> Charly Garcia </artista>
+    <año> 1990 </año>
+    </cancion>
+
+    <cancion genero="rock">
+    <titulo idioma="ingles"> 21 Guns </titulo>
+    <artista> Green Day </artista>
+    <año> 2009 </año>
+    </cancion>
+
+</musica>

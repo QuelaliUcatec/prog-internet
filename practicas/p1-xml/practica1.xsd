@@ -1,0 +1,57 @@
+<informacion_de_vehiculos>
+  <vehiculo tipo="deportivo">
+    <marca>Toyota</marca>
+    <modelo>GR86</modelo>
+    <anio>2025</anio>
+    <precio moneda="USD">35000</precio>
+    <color>Rojo</color>
+  </vehiculo>
+  
+  <vehiculo tipo="todo terreno">
+    <marca>Suzuki</marca>
+    <modelo>Jimny</modelo>
+    <anio>2026</anio>
+    <precio moneda="USD">45000</precio>
+    <color>Verde</color>
+  </vehiculo>
+  
+  <vehiculo tipo="sedan">
+    <marca>Toyota</marca>
+    <modelo>Corolla</modelo>
+    <anio>2025</anio>
+    <precio moneda="USD">30000</precio>
+    <color>Blanco</color>
+  </vehiculo>
+
+  <vehiculo tipo="camioneta">
+    <marca>Ford</marca>
+    <modelo>Ranger</modelo>
+    <anio>2024</anio>
+    <precio moneda="USD">42000</precio>
+    <color>Azul Metálico</color>
+  </vehiculo>
+
+  <vehiculo tipo="electrico">
+    <marca>Tesla</marca>
+    <modelo>Model 3</modelo>
+    <anio>2025</anio>
+    <precio moneda="USD">38900</precio>
+    <color>Gris</color>
+  </vehiculo>
+
+  <vehiculo tipo="suv">
+    <marca>Honda</marca>
+    <modelo>NSX</modelo>
+    <anio>2025</anio>
+    <precio moneda="USD">80500</precio>
+    <color>Plata</color>
+  </vehiculo>
+
+  <vehiculo tipo="lujo">
+    <marca>BMW</marca>
+    <modelo>M4 </modelo>
+    <anio>2023</anio>
+    <precio moneda="USD">40000</precio>
+    <color>Negro Mate</color>
+  </vehiculo>
+</informacion_de_vehiculos>

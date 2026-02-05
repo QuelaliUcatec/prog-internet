@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EquiposDeportivos>
+  
+    <Equipo categoria="Baloncesto">
+    <title lang="esto es">FIBA </title>
+    <Entrenador> Omar Quinteros </Entrenador>
+    <Capitan> Gabriel Giron </Capitan>
+    <Año> 2008 </Año> 
+    </Equipo>
+
+    <Equipo categoria="Futbol">
+    <title lang="somos"> Barcelona </title>
+    <Entrenador> Hansi Flick </Entrenador>
+    <Capitan>  Marc- Andre ter Stegen </Capitan>
+    <Delantero> Robert Lewandowski </Delantero>
+    <Fundacion> 29 de Noviembre de 1899 </Fundacion>
+    </Equipo>
+
+    <Equipo categoria="Voleybol">
+    <title lang="somos"> Akari Power Rangers</title>
+    <Entrenador> Takayuki Minowa </Entrenador>
+    <Capitana> Gretchel Soltones </Capitana>
+    <Fundacion> 2022 </Fundacion>
+    </Equipo>
+
+</EquiposDeportivos>
+

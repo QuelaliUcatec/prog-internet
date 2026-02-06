@@ -56,7 +56,7 @@ function App() {
 
   // Función para manejar las operaciones
 const manejarOperacion = (op: string) => {
-    // Si ya hay una operación pendiente y un valor anterior, calculamos el parcial primero
+    // Si ya hay una operación pendiente y un valor anterior, se calcula el parcial primero
     if (valorAnterior !== null && operacionPendiente !== null) {
       const parcial = realizarCalculo(valorAnterior, Number(valorActual), operacionPendiente);
       setValorAnterior(Number(parcial));
@@ -71,7 +71,7 @@ const manejarOperacion = (op: string) => {
     setValorActual("0");
   };
 
-  // Función auxiliar para no repetir código de cálculo
+  // Función para no repetir código de cálculo
   const realizarCalculo = (n1: number, n2: number, op: string): string | number => {
     switch (op) {
       case "+": return n1 + n2;
@@ -95,7 +95,7 @@ const manejarOperacion = (op: string) => {
 
   return (
     <div style={calculadoraContainer}>
-      <h3 style={{color: 'white', textAlign: 'center'}}>Calculadora v1.0</h3>
+      <h3 style={{color: 'white', textAlign: 'center'}}>Calculadora v2.0</h3>
       
       {/* Pantalla con rastro visual */}
       <div style={pantalla}>
@@ -104,7 +104,6 @@ const manejarOperacion = (op: string) => {
       </div>
 
       <div style={gridBotones}>
-        {/* ... (tus botones se mantienen exactamente igual) ... */}
         <button style={{ gridColumn: 'span 3', backgroundColor: '#ff5555' }} onClick={limpiar}>C</button>
         <button style={{ backgroundColor: '#f39c12' }} onClick={() => manejarOperacion('/')}>/</button>
         {['7', '8', '9'].map(n => <button key={n} onClick={() => presionarNumero(n)}>{n}</button>)}

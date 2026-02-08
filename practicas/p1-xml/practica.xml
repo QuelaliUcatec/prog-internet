@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+	<casino>
+		<Mesa1>
+		    <NombreJuego>Ruleta</NombreJuego>
+		    <CantJugadores>36</CantJugadores>
+		    <Estado>Abierto</Estado>
+	    </Mesa1>
+		<Mesa2>
+		    <NombreJuego>Black Jack</NombreJuego>
+			<CantJugadores>6</CantJugadores>
+			<Estado>Cerrado</Estado>
+		</Mesa2>
+		<Mesa3 >
+		    <NombreJuego>Poker</NombreJuego>
+            <CantJugadores>6</CantJugadores>
+            <Estado>Cerrado</Estado>
+		</Mesa3>
+        
+	</casino>

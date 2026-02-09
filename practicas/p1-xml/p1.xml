@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<musica>
+    <cancion genero="Trap">
+    <titulo idioma="español"> Temor  </titulo>
+    <artista> C.R.O </artista>
+    <año> 2025 </año>
+    </cancion>
+
+    <cancion genero="ELectroNica">
+    <titulo idioma="ingles"> Mind </titulo>
+    <artista> Skrillex </artista>
+    <año> 2019 </año>
+    </cancion>
+
+    <cancion genero="Reggue">
+    <titulo idioma="ingles"> Is this love </titulo>
+    <artista> Bob Marley  </artista>
+    <año> 1998 </año>
+    </cancion>
+
+    <cancion genero="rock">
+    <titulo idioma="ingles"> 21 Guns </titulo>
+    <artista> Green Day </artista>
+    <año> 2009 </año>
+    </cancion>
+
+</musica>

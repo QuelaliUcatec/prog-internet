@@ -1,86 +1,26 @@
-import { useState } from 'react'
-import './App.css'
-
-const inputs: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  margin: "2px 2px 20px 2px",
-  gap: "5px"
-};
-
-const buttons: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "15px",
-  margin: "30px 10px"
-};
+// App.tsx
+import './index.css'
 
 function App() {
-
-  const [numero1, setNumero1] = useState<number>()
-  const [numero2, setNumero2] = useState<number>()
-  const [resultado, setResultado] = useState<number | string>("N/D")
-
-  const calcular = (operacion: string) => {
-    const n1 = Number(numero1);
-    const n2 = Number(numero2);
-
-    switch (operacion) {
-      case "+":
-        setResultado(n1 + n2);
-        break;
-      case "-":
-        setResultado(n1 - n2);
-        break;
-      case "*":
-        setResultado(n1 * n2);
-        break;
-      case "/":
-        if (n2 == 0) {
-          setResultado("Error - Divisioni por cero")
-        }
-        else {
-          setResultado(n1 / n2);
-        }
-        break;
-      default:
-        setResultado("Operacion Invalida!!!");
-    }
-  }
-
   return (
-    <>
-      <h1>Version Calculadora 1.0</h1>
-
-      <div style={inputs}>
-        <input
-          type="text"
-          value={numero1}
-          onChange={(e) => setNumero1(Number(e.target.value))}
-          placeholder='Numero 1'
-        />
-
-        <input
-          type='text'
-          value={numero2}
-          onChange={(e) => setNumero2(Number(e.target.value))}
-          placeholder='Numero 2'
-        />
+    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4">
+      <div className="bg-white p-8 rounded-2xl shadow-2xl text-center hover:scale-105 transition-transform duration-300 border-4 border-indigo-500">
+        <h1 className="text-3xl font-bold text-indigo-600 mb-4">
+          ¡Tailwind Configurado! 🚀
+        </h1>
+        <p className="text-gray-600 mb-6">
+          Si ves este texto con estilo y fondo oscuro, el método manual funcionó perfectamente.
+        </p>
+        <div className="flex gap-4 justify-center">
+          <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+            React + TS
+          </span>
+          <span className="px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold animate-bounce">
+            Vite
+          </span>
+        </div>
       </div>
-
-      <div style={buttons}>
-        <button onClick={() => calcular('+')}>+</button>
-        <button onClick={() => calcular('-')}>-</button>
-        <button onClick={() => calcular('*')}>*</button>
-        <button onClick={() => calcular('/')}>/</button>
-      </div>
-
-      <hr />
-
-      <h2>Resultado: {resultado}</h2>
-    </>
+    </div>
   )
 }
 

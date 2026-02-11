@@ -19,12 +19,12 @@ function Calculadora() {
     }
   };
 
-  // Clases base para replicar tu efecto de sombra 3D del CSS
+
   const btnBase = "p-4 text-xl font-semibold rounded-xl transition-all duration-200 cursor-pointer flex items-center justify-center";
   const sombraBtn = "shadow-[0_4px_0_#1e293b] active:shadow-none active:translate-y-1 hover:brightness-110";
 
   return (
-    // Reemplaza el body/html del CSS con estas clases de contenedor
+
     <div className="min-h-screen bg-[#0f172a] flex justify-center items-center font-sans">
       
       {/* .calculadora */}

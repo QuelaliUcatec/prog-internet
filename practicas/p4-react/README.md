@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# Documentación del Proyecto: Calculadora V3.0
+Tecnologías: React + Vite + TypeScript + Tailwind CSS (v4/v3.4)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Configuración del Entorno de Desarrollo
+Antes de tocar el código, necesitamos preparar el sistema operativo con las herramientas de ejecución.
 
-## Available Scripts
+### A. Gestión de Node.js con NVM
+Se recomienda el uso de NVM (Node Version Manager). Esto permite cambiar entre versiones de Node fácilmente, algo vital para evitar errores de compatibilidad como el Abort trap: 6 visto en sistemas antiguos.
 
-In the project directory, you can run:
+- En Windows: Descarga nvm-windows desde su repositorio oficial en GitHub.
 
-### `npm start`
+- En Mac/Linux: Instala nvm usando el script de **curl** o **wget** disponible en su documentación.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Instalación de la versión recomendada:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```js
+Bash
 
-### `npm test`
+- Para máxima compatibilidad (como en Mac)
+  nvm install 20
+  nvm use 20
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Para las últimas funciones (como en tu Windows)
+  nvm install 24
+  nvm use 24
+```
+### B. Node.js y NPM
+Al instalar Node a través de NVM, NPM (Node Package Manager) se instala automáticamente.
 
-### `npm run build`
+- Node.js: Es el entorno que permite ejecutar JavaScript fuera del navegador.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- NPM: Es el gestor que descarga las librerías (como Tailwind o React).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 2. Creación del Proyecto con Vite
+Vite es el "bundler" o "build tool" moderno que reemplaza a create-react-app. Es significativamente más rápido.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### A. Generar la estructura:
+```js
+Bash
 
-### `npm run eject`
+npm create vite@latest tu-carpeta -- --template react-ts
+```
+tu-carpeta: Nombre de la carpeta (debe coincidir con tu repositorio).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+--template react-ts: Configura el proyecto con React y TypeScript desde el inicio.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### B. Entrar e instalar dependencias base:
+```js
+Bash
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+cd p4-react
+npm install
+```
+### 3. Instalación de Tailwind CSS
+Dependiendo de tu sistema operativo, el proceso varía para asegurar la estabilidad:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Opción 1: Tailwind v4 (Recomendado para Windows Moderno)
+Es la versión más rápida y no requiere archivos de configuración extensos.
+```js
+Bash
 
-## Learn More
+npm install tailwindcss @tailwindcss/vite
+```
+Configuración en vite.config.ts:
+```js
+TypeScript
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+import tailwindcss from '@tailwindcss/vite'
+// ... añadir tailwindcss() en el array de plugins
+```
+#### Opción 2: Tailwind v3.4 (Recomendado para Mac Antiguo)
+Evita el uso de binarios que requieren macOS 13+.
+```js
+Bash
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm install -D tailwindcss@3.4 postcss autoprefixer
+npx tailwindcss init -p
+```
+### 4. Documentación del Código (App.tsx)
+El corazón de la aplicación es un componente funcional de React que utiliza Hooks para gestionar la lógica matemática y el historial visual.
 
-### Code Splitting
+### Arquitectura de la Lógica
+#### A. Gestión de Estados (Hooks)
+- **valorActual:** Un string que muestra lo que el usuario ve en pantalla. Se usa string para facilitar la concatenación de números (ej: "1" + "2" = "12").
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **valorAnterior:** Almacena el número previo cuando se pulsa un operador.
 
-### Analyzing the Bundle Size
+- **memoria**: Gestiona el rastro visual de la operación (ej: "10 + 5 =").
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### B. Flujo de Operación
+1. Entrada: El usuario pulsa un número -> presionarNumero actualiza el string.
 
-### Making a Progressive Web App
+2. Operación: Al pulsar +, -, etc. -> manejarOperacion guarda el valor actual, define la operación y limpia la pantalla principal.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. Cálculo: La función realizarCalculo procesa los datos mediante un switch para devolver el resultado aritmético.
 
-### Advanced Configuration
+4. Finalización: calcularResultado cierra la operación, actualiza la memoria con el símbolo = y muestra el total en grande.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Interfaz y Estilos (UI)
+Se utiliza un sistema de Grid de Tailwind CSS para alinear los botones:
 
-### Deployment
+- Contenedor Principal: Un min-h-screen con degradado para centrar la calculadora.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Pantalla: Un div con flex-col y justify-end para que los números siempre aparezcan pegados a la derecha y abajo, imitando una calculadora real.
 
-### `npm run build` fails to minify
+- Botones: Se definen constantes (btnNum, btnOp) para aplicar estilos de forma masiva, incluyendo efectos hover y active:scale-95 para feedback táctil.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### 5. Resultado del proyecto
+![alt text](image.png)

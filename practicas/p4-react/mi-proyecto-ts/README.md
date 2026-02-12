@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# Documentación del Proyecto Calculadora
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este documento explica el funcionamiento principal de la aplicación `App.tsx` y algunos conceptos clave utilizados en el desarrollo.
 
-Currently, two official plugins are available:
+## ¿Qué hace `App.tsx`?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`App.tsx` es el componente principal de nuestra aplicación de calculadora construida con React. Su función es renderizar la interfaz de usuario (la pantalla y los botones) y gestionar la lógica de las operaciones matemáticas.
 
-## React Compiler
+El componente maneja el "estado" de la aplicación, que incluye:
+- **`pantalla`**: Muestra el número actual que el usuario está escribiendo o el resultado.
+- **`memoria`**: Almacena el primer número ingresado cuando se selecciona una operación (como sumar o restar).
+- **`operacion`**: Guarda qué operación matemática se va a realizar (+, -, *, /).
+- **`esperandoSegundoNumero`**: Una bandera (true/false) que indica si el próximo número que presione el usuario debe empezar uno nuevo en la pantalla (como después de elegir una operación).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Explicación del comando `.map`
 
-## Expanding the ESLint configuration
+En el código, verás algo como esto:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```javascript
+{[7, 8, 9, '*'].map((val) => ( ... ))}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+El método **`.map()`** es una función de JavaScript que se usa en arreglos (arrays). Su propósito es "transformar" cada elemento de una lista en otra cosa.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+En este caso, lo usamos para **generar botones automáticamente** en lugar de escribir `<button>...</button>` cuatro veces seguidas.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Entrada:** Una lista de valores: `[7, 8, 9, '*']`.
+- **Proceso:** Por cada valor (`val`), React crea (retorna) un elemento `<button>`.
+- **Salida:** Una lista de botones renderizados en la pantalla con esos valores.
+
+Es una forma eficiente y limpia de crear elementos repetitivos en la interfaz.
+
+## Explicación de la Lógica Condicional
+
+El código contiene la siguiente línea dentro del `.map()`:
+
+```javascript
+val === 'number' ? agregarNumero(String(val)) : prepararOperacion(val)
 ```
+
+(Nota: En el código real usamos `typeof val === 'number'`, pero el concepto es el mismo).
+
+Esto es un **Operador Ternario**. Es una forma corta de escribir un `if-else`. Se lee así:
+
+1.  **Condición:** `¿Es el valor un número?` (`typeof val === 'number'`)
+2.  **Si es VERDADERO (?):** Ejecuta `agregarNumero(String(val))`. Esto significa que si el botón es 7, 8 o 9, lo agrega a la pantalla.
+3.  **Si es FALSO (:):** Ejecuta `prepararOperacion(val)`. Esto significa que si el valor NO es un número (por ejemplo, es un '*'), entonces prepara la calculadora para multiplicar.
+
+En resumen: "Si tocaste un número, agrégalo a la pantalla; si no, asume que es una operación y prepárala".
+
+## ¿Qué son NPM y Vite?
+
+### NPM (Node Package Manager)
+**NPM** es el gestor de paquetes de Node.js. Imagínalo como una "tienda de aplicaciones" o una biblioteca gigante para código de programación.
+- Nos permite instalar librerías creadas por otros (como React) para no tener que escribir todo desde cero.
+- Gestiona las dependencias de nuestro proyecto (guarda qué versiones de cada librería estamos usando en `package.json`).
+- Nos permite ejecutar scripts, como iniciar el servidor de desarrollo (`npm run dev`).
+
+### Vite
+**Vite** (palabra francesa para "rápido") es una herramienta de construcción (build tool) moderna para el desarrollo web.
+- **Servidor de Desarrollo Veloz:** Inicia tu proyecto casi instantáneamente.
+- **Recarga Rápida (HMR):** Cuando guardas un cambio en tu código, Vite actualiza la página web al instante sin recargarla toda, manteniendo el estado de tu aplicación.
+- **Optimización:** Prepara tu código para producción de manera muy eficiente.
+- Es el entorno que usamos para crear y correr este proyecto de React.

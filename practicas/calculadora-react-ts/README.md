@@ -1,73 +1,54 @@
-# React + TypeScript + Vite
+#  Calculadora Web con React y TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##  Descripción General del Proyecto
 
-Currently, two official plugins are available:
+Este proyecto consiste en el desarrollo de una *calculadora web interactiva* utilizando *React* y *TypeScript, creada como práctica para la materia **Programación en Internet*.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+La aplicación permite realizar operaciones matemáticas básicas, mostrar un historial de cálculos, soportar interacción mediante teclado y presentar una interfaz moderna con un enfoque de experiencia de usuario (UX).
 
-## React Compiler
+------------------------
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+##  Objetivos del Proyecto
 
-## Expanding the ESLint configuration
+- Aplicar conceptos fundamentales de *Programación en Internet*
+- Utilizar *React* para crear interfaces dinámicas
+- Implementar *TypeScript* para mejorar la calidad del código
+- Manejar eventos de usuario (clics y teclado)
+- Desarrollar una interfaz amigable y funcional
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-------------------------
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+##  Tecnologías Utilizadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- *React*
+- *TypeScript*
+- *Vite*
+- *HTML5*
+- *CSS3*
+- *Git y GitHub*
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+----------------------------------
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##  Temas Más Importantes Aplicados
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Desarrollo Web (Front-End)
+- Creación de una aplicación que se ejecuta en el navegador
+- Uso de tecnologías web modernas
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-----------------------------------
+
+### 2. React
+- Uso de *componentes* (App, Calculator)
+- Renderizado dinámico de contenido
+- Separación de responsabilidades
+
+-----------------------------------
+
+### 3. TypeScript
+- Tipado estático para variables y funciones
+- Mejora en la legibilidad y mantenimiento del código
+- Prevención de errores comunes
+
+Ejemplo:
+```ts
+const [display, setDisplay] = useState<string>("");

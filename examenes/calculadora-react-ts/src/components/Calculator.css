@@ -1,0 +1,113 @@
+body {
+  background: #e0e5ec;
+  font-family: Arial, sans-serif;
+}
+
+.calculator {
+  width: 320px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 20px;
+  background: #e0e5ec;
+  box-shadow: 9px 9px 16px #b8bec7,
+              -9px -9px 16px #ffffff;
+}
+
+.display {
+  height: 60px;
+  background: #e0e5ec;
+  border-radius: 15px;
+  padding: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: right;
+  color: #007bff; /* 🔵 Azul eléctrico */
+  box-shadow: inset 5px 5px 10px #b8bec7,
+              inset -5px -5px 10px #ffffff;
+  margin-bottom: 20px;
+}
+
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.btn {
+  height: 55px;
+  border: none;
+  border-radius: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 5px 5px 10px #b8bec7,
+              -5px -5px 10px #ffffff;
+}
+
+/* Azul eléctrico para números */
+.number {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+
+/* Operadores */
+.operator {
+  background: #cfd8dc;
+  color: #0056b3; /* Azul más oscuro */
+  font-weight: bold;
+}
+
+/* Igual gris negro */
+.equal {
+  grid-column: span 4;
+  background: #1f1f1f;
+  color: #00bfff; /* Azul brillante sobre negro */
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+/* Hover */
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+/* Active */
+.btn:active {
+  box-shadow: inset 5px 5px 10px #b8bec7,
+              inset -5px -5px 10px #ffffff;
+  transform: scale(0.95);
+}
+
+.history {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 15px;
+  background: #d1d9e6; /* Contraste suave */
+  box-shadow: inset 4px 4px 8px #b0b8c4,
+              inset -4px -4px 8px #f0f4fa;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.history h4 {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #005eff; /* Azul eléctrico oscuro */
+  text-align: center;
+}
+
+.history p {
+  margin: 4px 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #e0e5ec;
+  color: #1f1f1f; /* Texto oscuro para contraste */
+  font-size: 13px;
+  box-shadow: 2px 2px 4px #b8bec7,
+              -2px -2px 4px #ffffff;
+}
+

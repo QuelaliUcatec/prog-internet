@@ -1,0 +1,38 @@
+/* CONTENEDOR GENERAL */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* GRID BASE */
+.pokemon-grid {
+  display: grid;
+  gap: 16px;
+}
+
+/* 📱 CELULAR */
+@media (max-width: 600px) {
+  .pokemon-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+}
+
+/* 📱 TABLET */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .pokemon-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 💻 DESKTOP */
+@media (min-width: 1025px) {
+  .pokemon-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

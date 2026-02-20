@@ -1,27 +1,16 @@
-import { useState, useEffect } from 'react';
-
-const url = "https://pokeapi.co/api/v2/pokemon?limit=3000";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MetodoGet from "./pages/MetodoGet";
+import MetodoPost from "./pages/MetodoPost";
 
 function App() {
-
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
-
   return (
-    <>
-      <ul>
-        {data?.results?.map((item) => {
-          return <li>
-            <a href={item.url}>{item.name}</a>
-          </li>;
-        })}
-      </ul>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MetodoGet />} />
+        <Route path="/get" element={<MetodoGet />} />
+        <Route path="/post" element={<MetodoPost />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

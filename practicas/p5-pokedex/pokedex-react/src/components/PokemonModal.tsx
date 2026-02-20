@@ -1,5 +1,7 @@
 import type { Pokemon } from "../types/pokemon";
 import "./PokemonModal.css";
+import Pokemon3D from "./Pokemon3D";
+
 
 interface Props {
   pokemon: Pokemon;
@@ -22,11 +24,10 @@ const PokemonModal = ({ pokemon, onClose }: Props) => {
 
         <h2 className="pokemon-name">{pokemon.name}</h2>
 
-        <img
-          src={pokemon.sprites.front_default}
-          alt={pokemon.name}
-          className="modal-image"
+        <Pokemon3D
+        color={getColorByType(pokemon.types[0].type.name)}
         />
+
 
         <div className="pokemon-types">
           {pokemon.types.map(type => (

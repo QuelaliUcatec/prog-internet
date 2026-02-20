@@ -1,0 +1,66 @@
+.uc-container {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 18px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.uc-title {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.uc-input-wrapper {
+  position: relative;
+}
+
+.uc-input {
+  width: 100%;
+  padding: 10px 40px 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.uc-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.06);
+  border-color: #6366f1;
+}
+
+.uc-loading {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.uc-list {
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #e6edf3;
+  border-radius: 8px;
+  max-height: 220px;
+  overflow: auto;
+  background: #fff;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.04);
+}
+
+.uc-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.uc-item:hover {
+  background: #f8fafc;
+}
+
+.uc-item-active {
+  background: #eef2ff;
+}

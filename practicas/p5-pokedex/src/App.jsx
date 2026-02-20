@@ -27,6 +27,11 @@ function App() {
   const [currentType, setCurrentType] = useState('') 
   const [searchTerm, setSearchTerm] = useState('')
 
+  // --- ESTADOS PARA PAGINACIÓN ---
+  const [allUrls, setAllUrls] = useState([]) 
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 20
+
   const handleSearch = (e) => {
     e.preventDefault()
     if(!searchTerm) return;
@@ -47,21 +52,41 @@ function App() {
       })
   }
 
+  // Función para cargar los detalles de una página específica
+  const fetchPageData = (page, urls) => {
+    setLoading(true)
+    // Calculamos el rango usando: 
+    // $inicio = (página - 1) \times cantidad$
+    // $fin = inicio + cantidad$
+    const start = (page - 1) * itemsPerPage
+    const end = start + itemsPerPage
+    const slice = urls.slice(start, end)
+
+    const promises = slice.map(p => fetch(p.pokemon.url).then(res => res.json()))
+    
+    Promise.all(promises).then(results => {
+      setPokemonList(results)
+      setLoading(false)
+      setCurrentPage(page)
+    })
+  }
+
   const loadType = (type) => {
     setLoading(true)
     setCurrentType(type)
     setViewMode('list') 
+
     fetch(`https://pokeapi.co/api/v2/type/${type}`)
       .then(res => res.json())
       .then(data => {
-        const rawList = data.pokemon.slice(0, 20).map(p => p.pokemon)
-        const promises = rawList.map(p => fetch(p.url).then(res => res.json()))
-        return Promise.all(promises)
+        setAllUrls(data.pokemon) // lista completa de este tipo
+        fetchPageData(1, data.pokemon) // Carga primera página
       })
-      .then(results => {
-        setPokemonList(results)
-        setLoading(false)
-      })
+  }
+
+  const changePage = (direction) => {
+    const nextPage = currentPage + direction
+    fetchPageData(nextPage, allUrls)
   }
 
   const goHome = () => {
@@ -69,6 +94,8 @@ function App() {
     setPokemonList([])
     setViewMode('home')
     setSearchTerm('')
+    setCurrentPage(1)
+    setAllUrls([])
   }
 
   return (
@@ -119,7 +146,27 @@ function App() {
               <div className="results-header">
                 <button onClick={goHome} className="back-btn">🏠 Volver al Inicio</button>
                 <h2>Tipo: {typeTranslations[currentType]?.toUpperCase()}</h2>
+                
+                {/* --- CONTROLES DE PAGINACIÓN --- */}
+                <div className="pagination-controls">
+                  <button 
+                    onClick={() => changePage(-1)} 
+                    disabled={currentPage === 1}
+                    className="page-btn"
+                  >
+                    ⬅ Anterior
+                  </button>
+                  <span className="page-info">Página {currentPage} de {Math.ceil(allUrls.length / itemsPerPage)}</span>
+                  <button 
+                    onClick={() => changePage(1)} 
+                    disabled={currentPage * itemsPerPage >= allUrls.length}
+                    className="page-btn"
+                  >
+                    Siguiente ➡
+                  </button>
+                </div>
               </div>
+
               <div className="pokemon-grid">
                 {pokemonList.map(pokemon => (
                   <PokemonCard key={pokemon.id} pokemon={pokemon} onClick={() => setSelectedPokemon(pokemon)} />

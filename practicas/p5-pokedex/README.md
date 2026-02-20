@@ -1,6 +1,13 @@
 # Guía Técnica: Estructura de la PokéDex Digital
 
-Este documento describe de manera general el funcionamiento y la construcción de una aplicación moderna para la consulta de datos de Pokémon. Se detalla la lógica aplicada, el uso de herramientas tecnológicas y la arquitectura del código.
+## Herramientas y Tecnologías Utilizadas
+
+Para el desarrollo de este proyecto se empleó las siguientes herramientas:
+
+- **[React](https://react.dev/):** Biblioteca principal utilizada para construir la interfaz de usuario mediante componentes reutilizables y gestión de estados.
+- **[Vite](https://vitejs.dev/):** Entorno de desarrollo y herramienta de construcción (bundler) elegida por su velocidad y eficiencia en la compilación del código.
+- **[TypeScript](https://www.typescriptlang.org/):** Superset de JavaScript que añade tipado estático, permitiendo la detección temprana de errores y una estructura más robusta.
+- **[npm (Node Package Manager)](https://nodejs.org/):** Gestor de paquetes utilizado para descargar, instalar y administrar las dependencias del proyecto.
 
 ---
 
@@ -35,10 +42,10 @@ const [selectedPokemon, setSelectedPokemon] = useState(null);
 ```
 
 **Estado de carga (`loading`):**  
-Se emplea para controlar la visibilidad de los mensajes de espera mientras se obtienen datos de la red.
+Controla la visibilidad de los mensajes de espera mientras se obtienen datos de la red.
 
 **Selección (`selectedPokemon`):**  
-Almacena la ficha completa del elemento que ha sido seleccionado para ser mostrado en detalle.
+Almacena la ficha completa del elemento que ha sido seleccionado para mostrarse en detalle.
 
 ---
 
@@ -57,7 +64,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`)
 ```
 
 **Lógica aplicada:**  
-Se envía una petición de red a una dirección específica. Una vez que el servidor responde, el paquete de datos se transforma a un formato legible para el programa y se guarda en la memoria interna.
+Se envía una petición de red a una dirección específica. Una vez que el servidor responde, los datos se transforman a un formato legible y se almacenan en la memoria interna.
 
 ---
 
@@ -75,10 +82,10 @@ Para lograr una navegación fluida, se aplicaron reglas de diseño que permiten 
 ```
 
 **Elevación:**  
-Se configuró un desplazamiento vertical para dar la sensación de que el elemento se levanta.
+Desplazamiento vertical para simular que el elemento se levanta.
 
 **Profundidad:**  
-Se añadió una sombra dinámica para separar visualmente el contenido del fondo de la página.
+Sombra dinámica que separa visualmente el contenido del fondo.
 
 ---
 
@@ -96,10 +103,27 @@ Para evitar distracciones cuando se consulta una ficha técnica, se diseñó un 
 ```
 
 **Lógica aplicada:**  
-Al activar la vista detallada, se aplica un filtro de desenfoque y se reduce el brillo al resto de la aplicación. Además, se bloquean las interacciones con el fondo para asegurar que el usuario se concentre únicamente en la información desplegada.
+Al activar la vista detallada, se aplica un filtro de desenfoque y reducción de brillo al resto de la aplicación. Además, se bloquean las interacciones con el fondo para garantizar la concentración del usuario en la información desplegada.
+
+---
+
+## 6. Sistema de Paginación Dinámica
+
+Para evitar la sobrecarga de memoria en el navegador al consultar categorías con un alto volumen de registros, se implementó un sistema de paginación que fracciona los resultados.
+
+### Implementación en JavaScript
+
+```javascript
+const start = (page - 1) * itemsPerPage;
+const end = start + itemsPerPage;
+const slice = urls.slice(start, end);
+```
+
+**Lógica aplicada:**  
+Se utiliza una fórmula matemática para extraer un bloque específico de datos (por ejemplo, 20 elementos) a partir de la lista total. El sistema monitorea la página actual y desactiva los controles de navegación si el usuario alcanza el límite inicial o final, garantizando una interacción estable y libre de errores.
 
 ---
 
 ## Conclusión
 
-El proyecto integra lógica de programación con diseño visual para resolver el problema de la consulta y presentación de datos complejos. El resultado es un sistema dinámico capaz de gestionar información externa y presentarla de manera organizada y estética.
+El proyecto integra lógica de programación con diseño visual para resolver el problema de la consulta y presentación de datos complejos. El resultado es un sistema dinámico capaz de gestionar información externa, modular grandes volúmenes de datos mediante paginación y presentarlos de manera organizada y estética.

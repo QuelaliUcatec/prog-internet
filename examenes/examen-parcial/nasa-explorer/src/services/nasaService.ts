@@ -1,13 +1,14 @@
 import axios from "axios";
 
 const BASE_URL = "https://api.nasa.gov/planetary/apod";
-const API_KEY = "TU_API_KEY";
+const API_KEY = "404yf39ZejrJ5znmf1RTA1Wd1YbzfnKCsr4w0Gnh";
 
 export interface NasaImage {
   title: string;
   date: string;
   url: string;
   explanation: string;
+  media_type: string;
 }
 
 export interface LogbookResponse {

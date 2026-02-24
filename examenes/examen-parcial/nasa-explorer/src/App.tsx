@@ -21,15 +21,17 @@ function App() {
   return (
     <div className="min-h-screen bg-black p-10">
       <h1 className="text-4xl text-white text-center mb-10">
-        🚀 NASA EXPLORER
+         NASA EXPLORER
       </h1>
       {loading ? (
         <p className="text-white text-center">Loading...</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {images.map((item, index) => (
+          {images
+          .filter(item => item.media_type === "image")
+          .map((item, index) => (
             <Card key={index} data={item} />
-          ))}
+            ))}
         </div>
       )}
     </div>

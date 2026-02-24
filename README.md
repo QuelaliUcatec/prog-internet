@@ -1,7 +1,7 @@
 
 # Guía Técnica: Estructura del Observador de la NASA
 
-## erramientas y Tecnologías Utilizadas
+## Herramientas y Tecnologías Utilizadas
 
 Para el desarrollo de este proyecto se emplearon las siguientes herramientas:
 

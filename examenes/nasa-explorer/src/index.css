@@ -1,0 +1,21 @@
+:root {
+  --bg-dark: #05070a;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --accent-blue: #0070f3;
+  --text-gray: #a1a1a1;
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-dark);
+  background-image: radial-gradient(circle at center, #11141b 0%, #05070a 100%);
+  color: white;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}

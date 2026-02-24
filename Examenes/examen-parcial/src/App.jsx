@@ -150,11 +150,10 @@ const Header = ({ activeApi, onApiChange }) => (
                     <button
                         key={api.id}
                         onClick={() => onApiChange(api.id)}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                            activeApi === api.id
-                                ? 'bg-mars-rust text-white'
-                                : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
-                        }`}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeApi === api.id
+                            ? 'bg-mars-rust text-white'
+                            : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
+                            }`}
                     >
                         <api.icon size={16} />
                         <span>{api.name}</span>
@@ -167,23 +166,103 @@ const Header = ({ activeApi, onApiChange }) => (
 
 const Modal = ({ isOpen, onClose, data }) => {
     if (!isOpen) return null;
+    const item = data.resource;
+    const [activeTab, setActiveTab] = useState('info');
+
+    const getRawTitle = () => {
+        if (item.type === 'apod') return item.title;
+        if (item.type === 'mars') return item.camera?.full_name || 'Mars Photo';
+        if (item.type === 'epic') return item.title || 'Earth Image';
+        return 'NASA Image';
+    };
+
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <div className="bg-space-card border border-mars-rust/30 rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
-                <div className="bg-mars-rust/10 p-4 border-b border-white/10 flex justify-between items-center">
-                    <div className="flex items-center gap-2 text-mars-orange">
-                        <Terminal size={20} />
-                        <span className="font-orbitron font-bold text-sm uppercase tracking-widest">Server Response</span>
+            <div className="bg-space-card border border-mars-rust/30 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
+                <div className="bg-mars-rust/10 p-4 border-b border-white/10 flex justify-between items-center text-mars-orange">
+                    <div className="flex items-center gap-2">
+                        <Save size={20} />
+                        <span className="font-orbitron font-bold text-sm uppercase tracking-widest">Sincronización Completada</span>
                     </div>
-                    <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors text-2xl">×</button>
+                    <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors text-2xl leading-none">×</button>
                 </div>
-                <div className="p-6">
-                    <div className="bg-black/40 p-4 rounded-lg font-mono text-sm text-green-400 overflow-auto max-h-96 custom-scrollbar">
-                        <pre>{JSON.stringify(data, null, 2)}</pre>
-                    </div>
+
+                <div className="flex border-b border-white/5">
+                    <button
+                        onClick={() => setActiveTab('info')}
+                        className={`flex-1 py-3 text-xs font-bold tracking-widest uppercase transition-colors ${activeTab === 'info' ? 'bg-mars-rust/20 text-white border-b-2 border-mars-rust' : 'text-slate-500 hover:text-slate-300'}`}
+                    >
+                        Información
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('json')}
+                        className={`flex-1 py-3 text-xs font-bold tracking-widest uppercase transition-colors ${activeTab === 'json' ? 'bg-mars-rust/20 text-white border-b-2 border-mars-rust' : 'text-slate-500 hover:text-slate-300'}`}
+                    >
+                        Respuesta Técnica
+                    </button>
                 </div>
-                <div className="p-4 border-t border-white/5 flex justify-end">
-                    <button onClick={onClose} className="mars-button text-sm">Cerrar</button>
+
+                <div className="p-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                    {activeTab === 'info' ? (
+                        <div className="space-y-6">
+                            <div className="relative aspect-video rounded-xl overflow-hidden border border-white/10 shadow-inner">
+                                <img src={item.img_src} alt="Preview" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                <div className="absolute bottom-4 left-4">
+                                    <h3 className="font-orbitron font-bold text-white text-lg">{getRawTitle()}</h3>
+                                    <p className="text-mars-orange text-xs font-mono uppercase tracking-wider">{item.type} mission</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Identificador</p>
+                                    <p className="font-mono text-sm text-white truncate">{item.id}</p>
+                                </div>
+                                <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Fecha Registro</p>
+                                    <p className="text-sm text-white">{item.date || item.earth_date}</p>
+                                </div>
+                                {item.camera && (
+                                    <div className="bg-white/5 p-4 rounded-xl border border-white/5 colspan-2">
+                                        <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Instrumento Óptico</p>
+                                        <p className="text-sm text-white">{item.camera.full_name} ({item.camera.name})</p>
+                                    </div>
+                                )}
+                                {item.rover && (
+                                    <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                                        <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Rover</p>
+                                        <p className="text-sm text-white">{item.rover.name}</p>
+                                    </div>
+                                )}
+                                {item.copyright && (
+                                    <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                                        <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Créditos</p>
+                                        <p className="text-sm text-white truncate">{item.copyright}</p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {item.explanation && (
+                                <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Descripción Científica</p>
+                                    <p className="text-xs text-slate-300 leading-relaxed italic line-clamp-3">{item.explanation}</p>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="bg-black/40 p-4 rounded-lg font-mono text-sm text-green-400 overflow-auto border border-white/5">
+                            <pre className="whitespace-pre-wrap">{JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    )}
+                </div>
+
+                <div className="p-4 border-t border-white/5 flex items-center justify-between bg-black/20">
+                    <p className="text-[10px] text-green-500 font-mono flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                        ESTADO: TRANSMISIÓN EXITOSA
+                    </p>
+                    <button onClick={onClose} className="mars-button text-sm px-8">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -340,10 +419,19 @@ export default function App() {
                                         <button
                                             onClick={() => handleSave(item)}
                                             disabled={isSaving}
-                                            className="mars-button flex items-center justify-center gap-2 w-full"
+                                            className={`mars-button flex items-center justify-center gap-2 w-full transition-all duration-300 ${isSaving ? 'scale-95 opacity-80' : 'hover:scale-105'}`}
                                         >
-                                            {isSaving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
-                                            Guardar
+                                            {isSaving ? (
+                                                <>
+                                                    <Loader2 className="animate-spin" size={18} />
+                                                    <span>Procesando...</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Save size={18} />
+                                                    <span>Guardar</span>
+                                                </>
+                                            )}
                                         </button>
                                     </div>
                                 </div>

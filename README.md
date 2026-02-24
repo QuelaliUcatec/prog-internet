@@ -135,4 +135,4 @@ Al abrir un detalle, se despliega una capa oscura casi opaca que cubre toda la p
 ---
 
 **Resultado Final:**  
-Una aplicación dinámica, reactiva y temática que combina consumo de APIs en tiempo real, persistencia simulada de datos, traducción automática y una experiencia visual inmersiva orientada a la exploración astronómica.
+Una aplicación dinámica, reactiva y temática que combina consumo de APIs en tiempo real, persistencia simulada de datos.

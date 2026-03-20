@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Futbol>
+    <Equipo>
+        <Nombre>The Strongest</Nombre>
+        <Ciudad>La Paz</Ciudad>
+        <Años_vida>115</Años_vida>
+    </Equipo>
+    <Equipo>
+        <Nombre>Wilsterman</Nombre>
+        <Ciudad>Cochabamba</Ciudad>
+        <Años_vida> </Años_vida>
+    </Equipo>
+

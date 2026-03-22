@@ -1,0 +1,67 @@
+/* ============================================================
+   CALCULADORA CIENTÍFICA — Estilos Globales
+   Tema: Sci-Fi / Terminal Futurista
+   ============================================================ */
+
+:root {
+  --bg-deep:       #070b14;
+  --bg-panel:      #0d1526;
+  --bg-display:    #050c18;
+  --border-glow:   #1a3a6e;
+  --accent-cyan:   #00e5ff;
+  --accent-orange: #ff6d00;
+  --accent-green:  #00e676;
+  --accent-red:    #ff1744;
+  --text-primary:  #e0f7ff;
+  --text-dim:      #4a7a9b;
+  --text-display:  #00e5ff;
+  --btn-base:      #111d35;
+  --btn-hover:     #172848;
+  --btn-active:    #0a1525;
+  --shadow-cyan:   0 0 12px rgba(0, 229, 255, 0.4);
+  --shadow-deep:   0 20px 60px rgba(0, 0, 0, 0.8);
+  --font-display:  'Share Tech Mono', monospace;
+  --font-ui:       'Exo 2', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-deep);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(21, 101, 192, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root { position: relative; z-index: 1; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-panel); }
+::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 2px; }
